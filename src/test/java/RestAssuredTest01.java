@@ -1,4 +1,3 @@
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -54,7 +53,7 @@ public class RestAssuredTest01 extends TestBase {
         String requestBody = """
                 {
                     "name": "morpheus",
-                    "job": "supervisor"
+                    "job": "leader"
                 }
                 """;
 
@@ -66,5 +65,59 @@ public class RestAssuredTest01 extends TestBase {
                 .post("/users")
                 .then()
                 .body("name", equalTo("morpheus"));
+    }
+
+    @Test
+    public void checkBodySingleUserUpdateTest() {
+
+        String requestBody = """
+                {
+                    "name": "morpheus",
+                    "job": "supervisor"
+                }
+                """;
+
+        given()
+                .header("x-api-key", "reqres-free-v1")
+                .contentType("application/json")
+                .body(requestBody)
+                .when()
+                .put("/users/2")
+                .then()
+                .statusCode(200)
+                .body("job", equalTo("supervisor"));
+    }
+
+    @Test
+    public void checkBodySingleUserDeleteTest() {
+
+
+        given()
+                .header("x-api-key", "reqres-free-v1")
+                .contentType("application/json")
+                .when()
+                .delete("/users/2")
+                .then()
+                .statusCode(204);
+    }
+
+    @Test
+    public void checkBodyRegisterUserTest() {
+
+        String requestBody = """
+                {
+                    "email": "eve.holt@reqres.in",
+                    "password": "pistol"
+                }
+                """;
+
+        given()
+                .header("x-api-key", "reqres-free-v1")
+                .contentType("application/json")
+                .body(requestBody)
+                .when()
+                .post("/register")
+                .then()
+                .statusCode(200);
     }
 }
