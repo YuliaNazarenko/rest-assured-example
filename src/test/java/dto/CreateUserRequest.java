@@ -1,3 +1,5 @@
+package dto;
+
 public class CreateUserRequest {
     private String name;
     private String job;

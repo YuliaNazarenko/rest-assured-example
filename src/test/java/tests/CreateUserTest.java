@@ -1,3 +1,7 @@
+package tests;
+
+import dto.CreateUserRequest;
+import dto.CreateUserResponse;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;

@@ -1,3 +1,5 @@
+package dto;
+
 public class CreateUserResponse {
     private String id;
     private String name;
